@@ -1,0 +1,124 @@
+.calculatorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+   /* black background */
+  background: linear-gradient(to bottom right, #4f4f80, #000000);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.calculator {
+  width: 320px;
+  background: rgba(30, 30, 50, 0.95);
+  /* Solid alternative to backdrop-filter */
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Optional pseudo-element for enhanced glass effect */
+.calculator::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom right,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.05));
+  z-index: -1;
+  border-radius: 20px;
+}
+
+/* Rest of your existing styles remain unchanged */
+.display {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  text-align: right;
+}
+
+.input {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  min-height: 30px;
+}
+
+.result {
+  font-size: 2.5rem;
+  color: white;
+  font-weight: bold;
+  min-height: 45px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.button {
+  height: 60px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.number {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.number:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.operator {
+  background: rgba(74, 20, 140, 0.5);
+  color: #9c88ff;
+  font-weight: bold;
+}
+
+.operator:hover {
+  background: rgb(1, 0, 2);
+}
+
+.function {
+  background: rgba(255, 107, 107, 0.5);
+  color: white;
+}
+
+.function:hover {
+  background: rgba(255, 107, 107, 0.7);
+}
+
+.equals {
+  background: #4cd137;
+  color: white;
+  font-weight: bold;
+  grid-column: span 1;
+  
+}
+
+.equals:hover {
+  background: #44bd32;
+}
