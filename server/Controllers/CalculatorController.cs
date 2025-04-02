@@ -6,7 +6,7 @@ using CalculatorBackend.Models;
 namespace CalculatorBackend.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/calculate")]  // Changed from "[controller]"
 public class CalculateController : ControllerBase
 {
     private readonly CalculatorContext _context;
@@ -44,12 +44,19 @@ public class CalculateController : ControllerBase
     [HttpGet("history")]
     public async Task<IActionResult> GetHistory()
     {
-        var history = await _context.Calculations
-            .OrderByDescending(c => c.Timestamp)
-            .Take(10)
-            .ToListAsync();
+        try
+        {
+            var history = await _context.Calculations
+                .OrderByDescending(c => c.Timestamp)
+                .Take(10)
+                .ToListAsync();
 
-        return Ok(history);
+            return Ok(history);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { error = ex.Message });
+        }
     }
 
     private static double EvaluateExpression(string expression)
@@ -61,5 +68,5 @@ public class CalculateController : ControllerBase
 
 public class CalculationRequest
 {
-    public string Expression { get; set; }
+    public string? Expression { get; set; }
 }

@@ -122,3 +122,49 @@
 .equals:hover {
   background: #44bd32;
 }
+
+.historySection {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.historySection h3 {
+  margin-bottom: 10px;
+  color: white;
+}
+
+.historySection ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.historySection li {
+  padding: 5px 0;
+  color: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.error {
+  color: #ff4444;
+  padding: 10px;
+  background: rgba(255, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.empty {
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  padding: 10px;
+}
+
+.timestamp {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-left: 10px;
+}

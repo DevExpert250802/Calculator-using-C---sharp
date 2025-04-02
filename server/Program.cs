@@ -3,48 +3,33 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
+// Add services
 builder.Services.AddControllers();
-
-// Configure DbContext with SQLite
 builder.Services.AddDbContext<CalculatorContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Add CORS with more secure defaults
+// Configure CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactApp", policy =>
-    {
-        policy.WithOrigins("http://localhost:3000") // Only allow your React frontend
+        policy.WithOrigins("http://localhost:3000")
               .AllowAnyMethod()
               .AllowAnyHeader()
-              .AllowCredentials();
-    });
+              .AllowCredentials());
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
-
-app.UseHttpsRedirection();
-app.UseRouting();
-
-// Use CORS before other middleware
-app.UseCors("ReactApp");
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-// Apply pending migrations automatically (for development)
+// Apply migrations
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<CalculatorContext>();
-    dbContext.Database.Migrate();
+    var db = scope.ServiceProvider.GetRequiredService<CalculatorContext>();
+    db.Database.Migrate();
 }
+
+app.UseCors("ReactApp");
+app.UseRouting();
+app.UseAuthorization();
+app.MapControllers();
 
 app.Run();
